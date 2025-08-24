@@ -493,14 +493,16 @@
 <option value="NONE">NONE</option>
 <option value="Lemondae">Lemondae</option>
 <option value="Fulani">Fulani</option>
-<option value="Deluxe Pedicure">Deluxe Pedicure</option>
-<option value="Gel Pedicure">Gel Pedicure</option>
-<option value="Paraffin Pedicure">Paraffin Pedicure</option>
-<option value="Hot Stone Pedicure">Hot Stone Pedicure</option>
-<option value="French Pedicure">French Pedicure</option>
-<option value="Shellac Pedicure">Shellac Pedicure</option>
-<option value="Fish Pedicure">Fish Pedicure</option>
-<option value="Athletic Pedicure">Athletic Pedicure</option>
+<option value="Braided Mowhawk">Braided Mowhawk</option>
+<option value="Knotless">Knotless</option>
+<option value="Goddes Braids">Goddes Braids</option>
+<option value="Jada Wada Braids">Jada Wada Braids</option>
+<option value="Passion Twist">Passion Twist</option>
+<option value="Island Twist">Island Twist</option>
+<option value="Invisible Locs">Invisible Locs</option>
+<option value="Faux Locs">Faux Locs</option>
+<option value="Aliesha Keese Braid">Aliesha Keese Braid</option>
+<option value="Corn Row">Corn Row</option>
 </select>
 <label for="Size">Select Size:</label>
 <select id="Size" onchange="showEstimateTime(); loadAvailableSlots();">
@@ -861,29 +863,35 @@ function showEstimateTime() {
             case 'Fulani':
                 timeEstimate = 'Approximately 1.5 hours';
                 break;
-            case 'Deluxe Pedicure':
+            case 'Braided Mowhawk':
                 timeEstimate = 'Approximately 1.5 hours';
                 break;
-            case 'Gel Pedicure':
+            case 'Knotless':
                 timeEstimate = 'Approximately 2 hours';
                 break;
-            case 'Paraffin Pedicure':
+            case 'Goddes Braids':
                 timeEstimate = 'Approximately 1 hour';
                 break;
-            case 'Hot Stone Pedicure':
+            case 'Jada Wada Braids':
                 timeEstimate = 'Approximately 1.5 hours';
                 break;
-            case 'French Pedicure':
+            case 'Passion Twist':
                 timeEstimate = 'Approximately 1 hour';
                 break;
-            case 'Shellac Pedicure':
+            case 'Island Twist':
                 timeEstimate = 'Approximately 1.5 hours';
                 break;
-            case 'Fish Pedicure':
+            case 'Invisible Locs':
                 timeEstimate = 'Approximately 1 hour';
                 break;
-            case 'Athletic Pedicure':
+             case 'Faux Locs':
+                timeEstimate = 'Approximately 1 hour';
+                break;
+            case 'Aliesha Keese Braid':
                 timeEstimate = 'Approximately 1.5 hours';
+                break;
+            case 'Corn Row':
+                timeEstimate = 'Approximately 1 hour';
                 break;
             default:
                 timeEstimate = 'No estimate available';
@@ -1586,13 +1594,16 @@ function getBufferForSelectedServices() {
 const serviceDurations = {
   "Lemondae": 60,
   "Fulani": 90,
-  "Deluxe Pedicure": 90,
-  "Gel Pedicure": 120,
-  "Regular Manicure": 60,
-  "Spa Manicure": 90,
-  "Deluxe Manicure": 90,
-  "Gel Manicure": 120,
-  "Acrylic Powder Manicure": 120,
+  "Braided Mowhawk": 90,
+  "Knotless": 120,
+  "Goddes Braids": 60,
+  "Jada Wada Braids": 90,
+  "Passion Twist": 90,
+  "Island Twist": 120,
+  "Invisible Locs": 60,
+  "Faux Locs": 90,
+  "Aliesha Keese Braid": 90,
+  "Corn Row": 120,
   "NONE": 0
 };
 
