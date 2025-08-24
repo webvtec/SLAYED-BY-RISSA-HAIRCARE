@@ -522,9 +522,9 @@
 <option value="Bohemian Curls">Bohemian Curls</option>
 <option value="Bead">Bead</option>
 </select>
-<div id="extensionLengthContainer" style="display: none; margin-top: 15px;">
-<label for="extensionLength">Select Length:</label>
-<select id="extensionLength" onchange="loadAvailableSlots()">
+<div id="LengthContainer" style="display: none; margin-top: 15px;">
+<label for="Length">Select Length:</label>
+<select id="Length" onchange="loadAvailableSlots()">
 <option value="LONG">LONG</option>
 <option value="MEDIUM">MEDIUM</option>
 <option value="SHORT">SHORT</option>
@@ -747,8 +747,8 @@ function selectPeriod(period) {
 }
 
     function showExtensionLengthOptions() {
-  const extensionType = document.getElementById('nailExtensionType').value;
-  const lengthContainer = document.getElementById('extensionLengthContainer');
+  const addOns = document.getElementById('addOns').value;
+  const lengthContainer = document.getElementById('LengthContainer');
 
   if (extensionType !== 'NONE') {
     lengthContainer.style.display = 'block';
@@ -838,7 +838,7 @@ const businessHours = {
 
 function showEstimateTime() {
     const hairStyle = document.getElementById('hairStyle').value;
-    const manicureType = document.getElementById('Size').value;
+    const Size = document.getElementById('Size').value;
     const estimateMessage = document.getElementById('estimateTimeMessage');
 
     // Default message when no type is selected
@@ -1037,17 +1037,17 @@ function submitBooking(event) {
   const time = document.getElementById('selectedTime').value;
 
   const hairStyle = document.getElementById('hairStyle').value;
-  const manicureType = document.getElementById('Size').value;
-  const nailExtensionType = document.getElementById('nailExtensionType').value;
+  const Size = document.getElementById('Size').value;
+  const addOns = document.getElementById('addOns').value;
 
-  let extensionLength = '';
-  if (nailExtensionType !== 'NONE') {
-    extensionLength = document.getElementById('extensionLength').value;
+  let addOns = '';
+  if (addOns !== 'NONE') {
+    addOns = document.getElementById('addOns').value;
   }
 
   let service = `hair: ${hairStyle}, Manicure: ${Size}`;
-  if (nailExtensionType !== 'NONE') {
-    service += `, Nail Extension: ${nailExtensionType} (${extensionLength})`;
+  if (addOns !== 'NONE') {
+    service += `, Nail Extension: ${addOns} (${addOns})`;
   }
 
   const bookingNumber = generateBookingNumber(name);
@@ -1467,7 +1467,7 @@ if (!user) {
             cleanService = b.service
               .replace(/,?\s*Size:\s*NONE/gi, "")
               .replace(/,?\s*hair:\s*NONE/gi, "")
-              .replace(/,?\s*Nail Extension:\s*NONE/gi, "")
+              .replace(/,?\s*addOns:\s*NONE/gi, "")
               .trim()
               .replace(/^,+|,+$/g, "") // Remove leading/trailing commas
               .replace(/,\s*,/g, ","); // Remove double commas
@@ -1580,7 +1580,7 @@ function getBufferForSelectedServices() {
   // Example buffer logic — adjust if needed
   if (hairStyle === "Gel Pedicure") buffer = 60;
   if (Size === "Gel Manicure") buffer = 50;
-  if (nailExtensionType !== "NONE") buffer = 40;
+  if (addOns !== "NONE") buffer = 40;
 
   return buffer;
 }
@@ -1621,7 +1621,7 @@ function getSelectedServiceDuration() {
 
   if (hair !== "NONE") duration += serviceDurations[hair] || 60;
   if (Size !== "NONE") duration += serviceDurations[Size] || 60;
-  if (nailExtension !== "NONE") duration += 60; // default for extensions
+  if (addOns !== "NONE") duration += 60; // default for extensions
 
   return duration || 60; // fallback
 }
@@ -1631,13 +1631,13 @@ async function loadAvailableSlots() {
   const date = document.getElementById('date').value;
   const hair = document.getElementById('hairStyle')?.value || "NONE";
   const Size = document.getElementById('Size')?.value || "NONE";
-  const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
+  const addOns = document.getElementById('addOns')?.value || "NONE";
 
   const timeSelect = document.getElementById('selectedTime');
   timeSelect.innerHTML = "<option value=''>-- Select a time --</option>";
 
   // Must have a date + at least one service
-  if (!date || (hair === "NONE" && Size === "NONE" && nailExtension === "NONE")) {
+  if (!date || (hair === "NONE" && Size === "NONE" && addOns === "NONE")) {
     timeSelect.innerHTML = "<option value=''>COMPLETE FORM TO SEE AVAILABLE SLOTS</option>";
     return;
   }
