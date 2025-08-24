@@ -502,8 +502,8 @@
 <option value="Fish Pedicure">Fish Pedicure</option>
 <option value="Athletic Pedicure">Athletic Pedicure</option>
 </select>
-<label for="manicureType">Select Manicure Type:</label>
-<select id="manicureType" onchange="showEstimateTime(); loadAvailableSlots();">
+<label for="Size">Select Size:</label>
+<select id="Size" onchange="showEstimateTime(); loadAvailableSlots();">
 <option value="NONE">NONE</option>
 <option value="Regular Manicure">Regular Manicure</option>
 <option value="Spa Manicure">Spa Manicure</option>
@@ -841,11 +841,11 @@ const businessHours = {
 
 function showEstimateTime() {
     const hairStyle = document.getElementById('hairStyle').value;
-    const manicureType = document.getElementById('manicureType').value;
+    const manicureType = document.getElementById('Size').value;
     const estimateMessage = document.getElementById('estimateTimeMessage');
 
     // Default message when no type is selected
-    if (hairStyle === 'NONE' && manicureType === 'NONE') {
+    if (hairStyle === 'NONE' && Size === 'NONE') {
         estimateMessage.innerHTML = '';
         return;
     }
@@ -891,7 +891,7 @@ function showEstimateTime() {
     }
 
     // Set estimated time based on manicure type
-    if (manicureType !== 'NONE') {
+    if (Size !== 'NONE') {
         switch (manicureType) {
             case 'Regular Manicure':
                 timeEstimate = 'Approximately 1 hour';
@@ -1034,7 +1034,7 @@ function submitBooking(event) {
   const time = document.getElementById('selectedTime').value;
 
   const hairStyle = document.getElementById('hairStyle').value;
-  const manicureType = document.getElementById('manicureType').value;
+  const manicureType = document.getElementById('Size').value;
   const nailExtensionType = document.getElementById('nailExtensionType').value;
 
   let extensionLength = '';
@@ -1042,7 +1042,7 @@ function submitBooking(event) {
     extensionLength = document.getElementById('extensionLength').value;
   }
 
-  let service = `hair: ${hairStyle}, Manicure: ${manicureType}`;
+  let service = `hair: ${hairStyle}, Manicure: ${Size}`;
   if (nailExtensionType !== 'NONE') {
     service += `, Nail Extension: ${nailExtensionType} (${extensionLength})`;
   }
@@ -1462,7 +1462,7 @@ if (!user) {
           let cleanService = "";
           if (b.service) {
             cleanService = b.service
-              .replace(/,?\s*Manicure:\s*NONE/gi, "")
+              .replace(/,?\s*Size:\s*NONE/gi, "")
               .replace(/,?\s*hair:\s*NONE/gi, "")
               .replace(/,?\s*Nail Extension:\s*NONE/gi, "")
               .trim()
@@ -1571,12 +1571,12 @@ function getBufferForSelectedServices() {
   let buffer = 30; // default
 
   const hairStyle = document.getElementById('hairStyle')?.value || "NONE";
-  const manicureType = document.getElementById('manicureType')?.value || "NONE";
+  const Size = document.getElementById('Size')?.value || "NONE";
   const nailExtensionType = document.getElementById('nailExtensionType')?.value || "NONE";
 
   // Example buffer logic — adjust if needed
   if (hairStyle === "Gel Pedicure") buffer = 60;
-  if (manicureType === "Gel Manicure") buffer = 50;
+  if (Size === "Gel Manicure") buffer = 50;
   if (nailExtensionType !== "NONE") buffer = 40;
 
   return buffer;
@@ -1598,13 +1598,13 @@ const serviceDurations = {
 
 function getSelectedServiceDuration() {
   const hair = document.getElementById('hairStyle')?.value || "NONE";
-  const manicure = document.getElementById('manicureType')?.value || "NONE";
+  const Size = document.getElementById('Size')?.value || "NONE";
   const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
 
   let duration = 0;
 
-  if (hair !== "NONE") duration += serviceDurations[pedicure] || 60;
-  if (manicure !== "NONE") duration += serviceDurations[manicure] || 60;
+  if (hair !== "NONE") duration += serviceDurations[hair] || 60;
+  if (Size !== "NONE") duration += serviceDurations[Size] || 60;
   if (nailExtension !== "NONE") duration += 60; // default for extensions
 
   return duration || 60; // fallback
@@ -1614,14 +1614,14 @@ function getSelectedServiceDuration() {
 async function loadAvailableSlots() {
   const date = document.getElementById('date').value;
   const hair = document.getElementById('hairStyle')?.value || "NONE";
-  const manicure = document.getElementById('manicureType')?.value || "NONE";
+  const Size = document.getElementById('Size')?.value || "NONE";
   const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
 
   const timeSelect = document.getElementById('selectedTime');
   timeSelect.innerHTML = "<option value=''>-- Select a time --</option>";
 
   // Must have a date + at least one service
-  if (!date || (hair === "NONE" && manicure === "NONE" && nailExtension === "NONE")) {
+  if (!date || (hair === "NONE" && Size === "NONE" && nailExtension === "NONE")) {
     timeSelect.innerHTML = "<option value=''>COMPLETE FORM TO SEE AVAILABLE SLOTS</option>";
     return;
   }
