@@ -488,8 +488,8 @@
 <select id="selectedTime" required="" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
 <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
 </select>
-<label for="hairType">Select Pedicure Type:</label>
-<select id="hairType" onchange="showEstimateTime(); loadAvailableSlots();">
+<label for="hairStyle">Select Hairstyle:</label>
+<select id="hairStyle" onchange="showEstimateTime(); loadAvailableSlots();">
 <option value="NONE">NONE</option>
 <option value="Regular Pedicure">Regular Pedicure</option>
 <option value="Spa Pedicure">Spa Pedicure</option>
@@ -840,12 +840,12 @@ const businessHours = {
 };
 
 function showEstimateTime() {
-    const hairType = document.getElementById('hairType').value;
+    const hairStyle = document.getElementById('hairStyle').value;
     const manicureType = document.getElementById('manicureType').value;
     const estimateMessage = document.getElementById('estimateTimeMessage');
 
     // Default message when no type is selected
-    if (hairType === 'NONE' && manicureType === 'NONE') {
+    if (hairStyle === 'NONE' && manicureType === 'NONE') {
         estimateMessage.innerHTML = '';
         return;
     }
@@ -853,8 +853,8 @@ function showEstimateTime() {
     let timeEstimate = '';
 
     // Set estimated time based on pedicure type
-    if (hairType !== 'NONE') {
-        switch (hairType) {
+    if (hairStyle !== 'NONE') {
+        switch (hairStyle) {
             case 'Regular Pedicure':
                 timeEstimate = 'Approximately 1 hour';
                 break;
@@ -1033,7 +1033,7 @@ function submitBooking(event) {
   const date = document.getElementById('date').value;
   const time = document.getElementById('selectedTime').value;
 
-  const pedicureType = document.getElementById('hairType').value;
+  const hairStyle = document.getElementById('hairStyle').value;
   const manicureType = document.getElementById('manicureType').value;
   const nailExtensionType = document.getElementById('nailExtensionType').value;
 
@@ -1042,7 +1042,7 @@ function submitBooking(event) {
     extensionLength = document.getElementById('extensionLength').value;
   }
 
-  let service = `hair: ${hairType}, Manicure: ${manicureType}`;
+  let service = `hair: ${hairStyle}, Manicure: ${manicureType}`;
   if (nailExtensionType !== 'NONE') {
     service += `, Nail Extension: ${nailExtensionType} (${extensionLength})`;
   }
@@ -1570,12 +1570,12 @@ function closeMyBookings() {
 function getBufferForSelectedServices() {
   let buffer = 30; // default
 
-  const hairType = document.getElementById('hairType')?.value || "NONE";
+  const hairStyle = document.getElementById('hairStyle')?.value || "NONE";
   const manicureType = document.getElementById('manicureType')?.value || "NONE";
   const nailExtensionType = document.getElementById('nailExtensionType')?.value || "NONE";
 
   // Example buffer logic — adjust if needed
-  if (hairType === "Gel Pedicure") buffer = 60;
+  if (hairStyle === "Gel Pedicure") buffer = 60;
   if (manicureType === "Gel Manicure") buffer = 50;
   if (nailExtensionType !== "NONE") buffer = 40;
 
@@ -1597,13 +1597,13 @@ const serviceDurations = {
 };
 
 function getSelectedServiceDuration() {
-  const pedicure = document.getElementById('hairType')?.value || "NONE";
+  const hair = document.getElementById('hairStyle')?.value || "NONE";
   const manicure = document.getElementById('manicureType')?.value || "NONE";
   const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
 
   let duration = 0;
 
-  if (pedicure !== "NONE") duration += serviceDurations[pedicure] || 60;
+  if (hair !== "NONE") duration += serviceDurations[pedicure] || 60;
   if (manicure !== "NONE") duration += serviceDurations[manicure] || 60;
   if (nailExtension !== "NONE") duration += 60; // default for extensions
 
@@ -1613,7 +1613,7 @@ function getSelectedServiceDuration() {
 // ✅ FINAL version — only one loadAvailableSlots() now
 async function loadAvailableSlots() {
   const date = document.getElementById('date').value;
-  const hair = document.getElementById('hairType')?.value || "NONE";
+  const hair = document.getElementById('hairStyle')?.value || "NONE";
   const manicure = document.getElementById('manicureType')?.value || "NONE";
   const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
 
