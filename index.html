@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -11,13 +10,13 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
     body {
       font-family: 'Zilla Slab', serif;
       margin: 0;
       padding: 0;
-      background-color: #FFFFFF;  /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
+      background-color: #FFFFFF;
     }
 
     .header-bar {
@@ -26,7 +25,7 @@
       left: 0;
       right: 0;
       height: 48px;
-      background-color: #FE5DC7;    /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
+      background-color: #FE5DC7;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -37,7 +36,7 @@
       font-family: 'Zilla Slab', serif;
       font-size: 26px;
       font-weight: bold;
-      background: linear-gradient(90deg, #abecd6, #f9d423, #24c6dc, #abecd6);  /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
+      background: linear-gradient(90deg, #abecd6, #f9d423, #24c6dc, #abecd6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
@@ -45,14 +44,13 @@
       text-align: center;
     }
 
-
     .menu-button {
       position: absolute;
       left: 0;
       top: 50%;
       transform: translateY(-50%);
-      background-color: #61134A;  /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
-      color: #FF69B4;  /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
+      background-color: #61134A;
+      color: #FF69B4;
       border: none;
       border-radius: 0px;
       cursor: pointer;
@@ -95,7 +93,7 @@
 
     h1 {
       text-align: center;
-      color: #FE5DC7;  /*COLOUR TO CHANGE TEXT ON REXIEWS PAGE (ALLOWED TO CHANGE FOR CLIENT)*/
+      color: #FE5DC7;
       margin-top: 80px;
     }
 
@@ -120,7 +118,7 @@
     }
 
     form button {
-      background-color: #61134A;  /*COLOUR TO CHANGE BOOM NOW BUTTON (ALLOWED TO CHANGE FOR CLIENT)*/
+      background-color: #61134A;
       color: white;
       border: none;
       cursor: pointer;
@@ -146,7 +144,7 @@
       text-align: center;
       margin-bottom: 15px;
       font-size: 22px;
-      color: #FE5DC7;  /*COLOUR TO CHANGE MAIN PAGE TEXTS (ALLOWED TO CHANGE FOR CLIENT)*/
+      color: #FE5DC7;
       text-transform: uppercase;
     }
 
@@ -157,17 +155,16 @@
     }
 
     .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 30px;
-}
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
 
     .gallery-grid img {
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      width: 100%;
       height: 230px;
       object-fit: cover;
     }
@@ -204,7 +201,7 @@
       right: 0px;
       top: 50%;
       transform: translateY(-50%);
-      background-color: #61134A;  /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
+      background-color: #61134A;
       color: red;
       border: none;
       padding: 0;
@@ -219,98 +216,92 @@
       text-decoration: none;
     }
 
-        .opening-hours {
-  font-family: Arial, sans-serif;
-  padding: 8px 0;      /* Optional spacing */
-  border-top: 2px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.opening-hours h3 {
-  font-size: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-  color: #FE5DC7; /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
-}
-
-.opening-hours p {
-  font-size: 13px;
-  margin: 2px 0;
-  color: #FFFFFF;   /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
-}
-
-.opening-hours p:last-child {
-  color: #FFFFFF; /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
-  font-weight: bold;
-}
-
-        .location-info {
-  font-family: Arial, sans-serif;
-  padding: 8px 0;     /* Optional spacing */
-}
-
-.location-info h3 {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-  color: #FE5DC7; /* (COLOUR ALLOWED TO CHANGE FOR CLIENT)*/
-}
-
-.location-info p {
-  font-size: 13px;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.8); /* Slightly lighter than title */
-}
-
-    .separator-line {
-  height: 2px;
-  background-color: #5B5B5B;
-  margin: 2px 0; /* Optional spacing */
+    .opening-hours {
+      font-family: Arial, sans-serif;
+      padding: 8px 0;
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     }
 
+    .opening-hours h3 {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      color: #FE5DC7;
+    }
 
-    /* Modal container */
-#myBookingsModal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: none; /* default hidden */
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
+    .opening-hours p {
+      font-size: 13px;
+      margin: 2px 0;
+      color: #FFFFFF;
+    }
 
-/* Modal box */
-#myBookingsBox {
-  background: #fff;
-  width: 90%;
-  max-width: 500px;
-  max-height: 80vh;   /* ✅ prevent overflowing screen */
-  border-radius: 12px;
-  overflow-y: auto;   /* ✅ allow scrolling when content is tall */
-  position: relative;
-  padding: 20px;
-}
+    .opening-hours p:last-child {
+      color: #FFFFFF;
+      font-weight: bold;
+    }
 
-/* Close button */
-#closeBookings {
-  position: sticky;   /* ✅ stays visible when scrolling */
-  top: 0;
-  float: right;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 10000;
-}
+    .location-info {
+      font-family: Arial, sans-serif;
+      padding: 8px 0;
+    }
 
-    
-  </style>
+    .location-info h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      color: #FE5DC7;
+    }
+
+    .location-info p {
+      font-size: 13px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .separator-line {
+      height: 2px;
+      background-color: #5B5B5B;
+      margin: 2px 0;
+    }
+
+    #myBookingsModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #myBookingsBox {
+      background: #fff;
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+      border-radius: 12px;
+      overflow-y: auto;
+      position: relative;
+      padding: 20px;
+    }
+
+    #closeBookings {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+</style>
 </head>
 <body>
 <div class="header-bar">
@@ -318,12 +309,14 @@
 <div class="header-title">HAIR CARE</div>
 <a class="location-button" href="https://maps.app.goo.gl/Y5KEuKuHc6AVJY1BA" target="_blank">📍</a>
 </div>
-<!-- ✅ Gallery Section (Now Wrapped) -->
+
+<!-- Gallery Section -->
 <div class="content-section active" id="gallerySection">
 <h2 style="text-align:center; margin-top:60px;"></h2>
 <div id="galleryDisplay"></div>
 </div>
-<!-- ✅ Menu -->
+
+<!-- Menu -->
 <div class="menu" id="menu">
 <a onclick="showSection('gallerySection'); closeMenu();">💅🏽 DESIGNS</a>
 <a onclick="showSection('bookingSection'); closeMenu();">📆 BOOKING</a>
@@ -338,14 +331,14 @@
 </div>
 <a class="admin-button" onclick="showUserBookings(); closeMenu();" style="display:block; text-align:center; font-size:15px; margin:10px auto; padding:10px 10px; background-color:#61134A; color:white; border-radius:6px; cursor:pointer; text-decoration:none; width:80%; white-space:nowrap; font-weight:bold; overflow:hidden; text-overflow:ellipsis;">
    MY BOOKINGS
-    </a>
+</a>
 <a onclick="showPaymentInfo(); closeMenu();" 
    style="display:block; text-align:center; font-size:15px; margin:10px auto; padding:10px 10px; background-color:#61134A; color:white; border-radius:6px; cursor:pointer; text-decoration:none; width:80%; white-space:nowrap; font-weight:bold; overflow:hidden; text-overflow:ellipsis;"
    href="javascript:void(0);">
    PAYMENT INFO
 </a>
     
-<!-- Another Separator Line -->
+<!-- Separator Line -->
 <div class="separator-line"></div>
     
 <div class="social-links" style="display:flex; justify-content:center; gap:35px; margin-top:25px;">
@@ -368,39 +361,32 @@
 <!-- TikTok -->
 <a href="https://www.tiktok.com/@tishay_nailpalace" target="_blank" style="display:inline-block;">
   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 448 512">
-    <!-- Pink/Red shadow -->
     <path fill="#ff0050" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" transform="translate(3, 3)"/>
-    
-    <!-- Cyan shadow -->
     <path fill="#25f4ee" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" transform="translate(-3, -3)"/>
-    
-    <!-- Main white logo -->
     <path fill="#ffffff" d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z"/>
   </svg>
 </a>
 </div>
 
-
 </div>
-<!-- Another Separator Line -->
+<!-- Separator Line -->
 <div class="separator-line"></div>
 <div class="location-info">
 <h3>LOCATION:</h3>
 <p>Shop #14, Kings Plaza, Montegobay, St. James, Jamaica</p>
 </div>
-<!-- Another Separator Line -->
+<!-- Separator Line -->
 <div class="separator-line"></div>
 <!-- Logout and Admin Buttons -->
 <a onclick="logoutUser(); closeMenu();" style="display:block; text-align:center; margin:10px auto; padding:10px 20px; background-color:red; color:white; border-radius:6px; cursor:pointer; text-decoration:none; width:80%; font-weight:bold;">
        LOGOUT
-    </a>
+</a>
 <a class="admin-button" onclick="login(); closeMenu();" style="display:block; text-align:center; margin:10px auto; padding:10px 20px; background-color:#61134A; color:white; border-radius:6px; text-decoration:none; width:80%; font-weight:bold;">
        ADMIN
-    </a>
-</div>
+</a>
 </div>
 
-    <!-- Add this booking confirmation modal right after your existing modals -->
+<!-- Booking confirmation modal -->
 <div id="bookingModal" style="
   display:none;
   position: fixed;
@@ -411,7 +397,7 @@
   z-index: 10000;
 ">
   <div style="
-    background: ;
+    background: white;
     padding: 20px;
     border-radius: 12px;
     max-width: 450px;
@@ -428,50 +414,23 @@
   </div>
 </div>
 
-    
 <!-- My Bookings Modal -->
-<div id="myBookingsModal" style="
-  display:none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-">
-<div id="myBookingsBox" style="
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    max-width:400px;
-    width:90%;
-    max-height:80vh;       /* ✅ keeps inside screen */
-    overflow-y:auto;       /* ✅ scroll only content */
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-    position:relative;
-  ">
-<!-- Close Button -->
-<button onclick="closeMyBookings()" style="
-      position:sticky; top:0; right:0;
-      float:right;
-      background:#fff;
-      border:none;
-      font-size:24px;
-      cursor:pointer;
-      z-index:10001;
-    ">✖</button>
+<div id="myBookingsModal">
+<div id="myBookingsBox">
+<button id="closeBookings" onclick="closeMyBookings()">✖</button>
 <h3 style="margin:10px 0; color:#FE5DC7; text-align:center;">
       My Last 5 Bookings
-    </h3>
+</h3>
 <div id="myBookingsContent"></div>
 </div>
 </div>
-<!-- ✅ Booking Section -->
+
+<!-- Booking Section -->
 <div class="content-section" id="bookingSection">
 <h1>BOOK APPOINTMENT</h1>
 <form onsubmit="submitBooking(event)">
 <label for="name">Name:</label>
-<input id="name" required="" type="text"/>
+<input id="name" required type="text"/>
 <label for="phone">Phone Number:</label>
 <input 
   id="phone" 
@@ -482,10 +441,9 @@
   required 
 />
 <label for="date">Preferred Date:</label>
-<input id="date" min="" onchange="loadAvailableSlots()" required="" type="date"/>
-<!-- ✅ Time slots will appear here -->
+<input id="date" min="" onchange="loadAvailableSlots()" required type="date"/>
 <label for="selectedTime">Available Times:</label>
-<select id="selectedTime" required="" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
+<select id="selectedTime" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
 <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
 </select>
 <label for="hairStyle">Select Hairstyle:</label>
@@ -513,7 +471,7 @@
 <option value="Extra Large">Extra Large</option>
 </select>
 <label for="addOns">Select Add ons:</label>
-<select id="addOns" onchange="showaddOnsOptions(); loadAvailableSlots();">
+<select id="addOns" onchange="showAddOnsOptions(); loadAvailableSlots();">
 <option value="NONE">NONE</option>
 <option value="Bantoo Knots">Bantoo Knots</option>
 <option value="Curly Ends">Curly Ends</option>
@@ -532,15 +490,16 @@
 </div>
 <p id="estimateTimeMessage" style="color: #FE5DC7; font-weight: bold;"></p>
 <div style="margin: 15px 0; display: flex; align-items: center;">
-<input id="lateAgreement" required="" style="margin-right: 3px;" type="checkbox"/>
+<input id="lateAgreement" required style="margin-right: 3px;" type="checkbox"/>
 <label for="lateAgreement" style="font-size: 14px; cursor: pointer; line-height: 1.4;">
         I agree to make an online deposit of <strong>$4,000 (JMD)</strong> within the next 48 Hours to secure my booking.
-      </label>
+</label>
 </div>
 <button type="submit">Book Now</button>
 </form>
 <p id="bookingMessage"></p>
 </div>
+
 <div class="content-section" id="reviewsSection">
 <h1 style="text-align:center; color:#FE5DC7;">CLIENT REVIEWS</h1>
 <div id="reviewPrompt" style="display:none; max-width:500px; margin:20px auto; 
@@ -551,9 +510,9 @@
 </div>
 <form id="reviewForm" style="max-width:85%; margin:10px auto; text-align:center;">
 <div style="max-width: 50%; margin: 0 auto;">
-<input id="reviewName" placeholder="Your Name" required="" style="width:100%; margin-bottom:10px; padding:10px; border-radius:6px; border:1px solid #ccc;" type="text"/>
+<input id="reviewName" placeholder="Your Name" required style="width:100%; margin-bottom:10px; padding:10px; border-radius:6px; border:1px solid #ccc;" type="text"/>
 </div>
-<textarea id="reviewComment" placeholder="Write your review..." required="" style="width:90%; height:80px; margin-bottom:10px; padding:10px; border-radius:6px; border:1px solid #ccc;"></textarea>
+<textarea id="reviewComment" placeholder="Write your review..." required style="width:90%; height:80px; margin-bottom:10px; padding:10px; border-radius:6px; border:1px solid #ccc;"></textarea>
 <div id="starRating" style="font-size:24px; margin-bottom:10px; cursor:pointer; color:#ccc;">
 <span data-value="1">★</span>
 <span data-value="2">★</span>
@@ -561,11 +520,9 @@
 <span data-value="4">★</span>
 <span data-value="5">★</span>
 </div>
-<button style="background-color:#61134A; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;" type="submit">SUBMIT
-      REVIEW</button>
+<button style="background-color:#61134A; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;" type="submit">SUBMIT REVIEW</button>
 </form>
 <p id="reviewSubmitMsg" style="text-align:center; color:green;"></p>
-<!-- Container where reviews will be loaded -->
 <div id="reviewsContainer" style="max-width:100%; margin:20px auto;"></div>
 </div>
 
@@ -589,7 +546,6 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     position: relative;
   ">
-<!-- Close button -->
 <span onclick="closeAdminModal()" style="
       position: absolute;
       top: 10px;
@@ -608,90 +564,80 @@
       background-color:#ccc; color:#333; border:none;
       padding:10px 20px; border-radius:6px; cursor:pointer;">
       Cancel
-    </button>
+</button>
 <button onclick="attemptAdminLogin()" style="
       background-color:#6200ea; color:white; border:none;
       padding:10px 20px; border-radius:6px; cursor:pointer; margin-right:8px;">
       Login
-    </button>
+</button>
 </div>
 </div>
-<!-- ✅ Scripts -->
+
 <script>
     let currentUser = null;
 
     const firebaseConfig = {
-  apiKey: "AIzaSyBx9_GrR4_ruM8v-GDOj4De1erg7nWsH08",
-  authDomain: "arcturus-nail-care.firebaseapp.com",
-  projectId: "arcturus-nail-care",
-  storageBucket: "arcturus-nail-care.appspot.com",
-  messagingSenderId: "604991163098",
-  appId: "1:604991163098:web:47730d7480c66d813633e3"
-};
+      apiKey: "AIzaSyBx9_GrR4_ruM8v-GDOj4De1erg7nWsH08",
+      authDomain: "arcturus-nail-care.firebaseapp.com",
+      projectId: "arcturus-nail-care",
+      storageBucket: "arcturus-nail-care.appspot.com",
+      messagingSenderId: "604991163098",
+      appId: "1:604991163098:web:47730d7480c66d813633e3"
+    };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
     firebase.auth().onAuthStateChanged(user => {
-  currentUser = user || null; // Store user if logged in, null if not
-  loadReviews(currentUser);
-});
-
+      currentUser = user || null;
+      loadReviews(currentUser);
+    });
 
     function login() {
-  document.getElementById('adminLoginModal').style.display = 'flex';
-}
+      document.getElementById('adminLoginModal').style.display = 'flex';
+    }
 
-function closeAdminModal() {
-  document.getElementById('adminLoginModal').style.display = 'none';
-  document.getElementById('adminLoginMsg').style.display = 'none'; // Hide error message
+    function closeAdminModal() {
+      document.getElementById('adminLoginModal').style.display = 'none';
+      document.getElementById('adminLoginMsg').style.display = 'none';
+      document.getElementById('adminEmail').value = "";
+      document.getElementById('adminPassword').value = "";
+    }
 
-  // ✅ Clear inputs on close
-  document.getElementById('adminEmail').value = "";
-  document.getElementById('adminPassword').value = "";
-}
+    function attemptAdminLogin() {
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value.trim();
+      const msg = document.getElementById('adminLoginMsg');
 
-function attemptAdminLogin() {
-  const email = document.getElementById('adminEmail').value.trim();
-  const password = document.getElementById('adminPassword').value.trim();
-  const msg = document.getElementById('adminLoginMsg');
+      const adminEmail = 'carlanviroberts@gmail.com';
+      const adminPassword = '@Carlanvi325';
 
-  // Hard-coded admin credentials
-  const adminEmail = 'carlanviroberts@gmail.com';
-  const adminPassword = '@Carlanvi325';
-
-  if (email === adminEmail && password === adminPassword) {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
-        // ✅ Close modal immediately
-        closeAdminModal();
-
-        // ✅ Redirect to dashboard
-        window.location.href = 'dashboard.html';
-      })
-      .catch(() => {
+      if (email === adminEmail && password === adminPassword) {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+          .then(() => {
+            closeAdminModal();
+            window.location.href = 'dashboard.html';
+          })
+          .catch(() => {
+            msg.textContent = "You are not an admin user.";
+            msg.style.display = "block";
+            document.getElementById('adminPassword').value = "";
+          });
+      } else {
         msg.textContent = "You are not an admin user.";
         msg.style.display = "block";
-
-        // ✅ Clear only password on error
         document.getElementById('adminPassword').value = "";
-      });
-  } else {
-    msg.textContent = "You are not an admin user.";
-    msg.style.display = "block";
+      }
+    }
 
-    // ✅ Clear only password on wrong login
-    document.getElementById('adminPassword').value = "";
-  }
-}
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      const button = document.querySelector(".menu-button");
 
-      function toggleMenu() {
-  const menu = document.getElementById("menu");
-  const button = document.querySelector(".menu-button");
-
-  if (menu.classList.contains("show")) {
-    closeMenu();
-  } else {
+      if (menu.classList.contains("show")) {
+        closeMenu();
+      }
+        else {
     menu.classList.add("show");
 
     // ✅ Enable outside click listener
