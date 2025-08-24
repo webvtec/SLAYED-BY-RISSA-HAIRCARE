@@ -512,14 +512,15 @@
 <option value="Large">Large</option>
 <option value="Extra Large">Extra Large</option>
 </select>
-<label for="nailExtensionType">Select Nail Extension Shape:</label>
-<select id="nailExtensionType" onchange="showExtensionLengthOptions(); loadAvailableSlots();">
+<label for="addOns">Select Add ons:</label>
+<select id="addOns" onchange="showaddOnsOptions(); loadAvailableSlots();">
 <option value="NONE">NONE</option>
-<option value="Almond">Almond</option>
-<option value="Stiletto">Stiletto</option>
-<option value="Square">Square</option>
-<option value="Coffin">Coffin</option>
-<option value="Oval">Oval</option>
+<option value="Bantoo Knots">Bantoo Knots</option>
+<option value="Curly Ends">Curly Ends</option>
+<option value="Boho">Boho</option>
+<option value="Barrel ends">Barrel ends</option>
+<option value="Bohemian Curls">Bohemian Curls</option>
+<option value="Bead">Bead</option>
 </select>
 <div id="extensionLengthContainer" style="display: none; margin-top: 15px;">
 <label for="extensionLength">Select Length:</label>
@@ -1602,6 +1603,12 @@ const serviceDurations = {
   "Medium": 90,
   "Large": 90,
   "Extra Large": 120,
+  "Bantoo Knots": 90,
+  "Curly Ends": 120,
+  "Boho": 60,
+  "Barrel ends": 90,
+  "Bohemian Curls": 90,
+  "Bead": 120,
   "NONE": 0
 };
 
