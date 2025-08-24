@@ -488,8 +488,8 @@
 <select id="selectedTime" required="" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
 <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
 </select>
-<label for="pedicureType">Select Pedicure Type:</label>
-<select id="pedicureType" onchange="showEstimateTime(); loadAvailableSlots();">
+<label for="hairType">Select Pedicure Type:</label>
+<select id="hairType" onchange="showEstimateTime(); loadAvailableSlots();">
 <option value="NONE">NONE</option>
 <option value="Regular Pedicure">Regular Pedicure</option>
 <option value="Spa Pedicure">Spa Pedicure</option>
@@ -840,12 +840,12 @@ const businessHours = {
 };
 
 function showEstimateTime() {
-    const pedicureType = document.getElementById('pedicureType').value;
+    const hairType = document.getElementById('hairType').value;
     const manicureType = document.getElementById('manicureType').value;
     const estimateMessage = document.getElementById('estimateTimeMessage');
 
     // Default message when no type is selected
-    if (pedicureType === 'NONE' && manicureType === 'NONE') {
+    if (hairType === 'NONE' && manicureType === 'NONE') {
         estimateMessage.innerHTML = '';
         return;
     }
@@ -853,8 +853,8 @@ function showEstimateTime() {
     let timeEstimate = '';
 
     // Set estimated time based on pedicure type
-    if (pedicureType !== 'NONE') {
-        switch (pedicureType) {
+    if (hairType !== 'NONE') {
+        switch (hairType) {
             case 'Regular Pedicure':
                 timeEstimate = 'Approximately 1 hour';
                 break;
@@ -1033,7 +1033,7 @@ function submitBooking(event) {
   const date = document.getElementById('date').value;
   const time = document.getElementById('selectedTime').value;
 
-  const pedicureType = document.getElementById('pedicureType').value;
+  const pedicureType = document.getElementById('hairType').value;
   const manicureType = document.getElementById('manicureType').value;
   const nailExtensionType = document.getElementById('nailExtensionType').value;
 
@@ -1042,7 +1042,7 @@ function submitBooking(event) {
     extensionLength = document.getElementById('extensionLength').value;
   }
 
-  let service = `Pedicure: ${pedicureType}, Manicure: ${manicureType}`;
+  let service = `hair: ${hairType}, Manicure: ${manicureType}`;
   if (nailExtensionType !== 'NONE') {
     service += `, Nail Extension: ${nailExtensionType} (${extensionLength})`;
   }
@@ -1463,7 +1463,7 @@ if (!user) {
           if (b.service) {
             cleanService = b.service
               .replace(/,?\s*Manicure:\s*NONE/gi, "")
-              .replace(/,?\s*Pedicure:\s*NONE/gi, "")
+              .replace(/,?\s*hair:\s*NONE/gi, "")
               .replace(/,?\s*Nail Extension:\s*NONE/gi, "")
               .trim()
               .replace(/^,+|,+$/g, "") // Remove leading/trailing commas
@@ -1570,12 +1570,12 @@ function closeMyBookings() {
 function getBufferForSelectedServices() {
   let buffer = 30; // default
 
-  const pedicureType = document.getElementById('pedicureType')?.value || "NONE";
+  const hairType = document.getElementById('hairType')?.value || "NONE";
   const manicureType = document.getElementById('manicureType')?.value || "NONE";
   const nailExtensionType = document.getElementById('nailExtensionType')?.value || "NONE";
 
   // Example buffer logic — adjust if needed
-  if (pedicureType === "Gel Pedicure") buffer = 60;
+  if (hairType === "Gel Pedicure") buffer = 60;
   if (manicureType === "Gel Manicure") buffer = 50;
   if (nailExtensionType !== "NONE") buffer = 40;
 
@@ -1597,7 +1597,7 @@ const serviceDurations = {
 };
 
 function getSelectedServiceDuration() {
-  const pedicure = document.getElementById('pedicureType')?.value || "NONE";
+  const pedicure = document.getElementById('hairType')?.value || "NONE";
   const manicure = document.getElementById('manicureType')?.value || "NONE";
   const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
 
@@ -1613,7 +1613,7 @@ function getSelectedServiceDuration() {
 // ✅ FINAL version — only one loadAvailableSlots() now
 async function loadAvailableSlots() {
   const date = document.getElementById('date').value;
-  const pedicure = document.getElementById('pedicureType')?.value || "NONE";
+  const hair = document.getElementById('hairType')?.value || "NONE";
   const manicure = document.getElementById('manicureType')?.value || "NONE";
   const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
 
@@ -1621,7 +1621,7 @@ async function loadAvailableSlots() {
   timeSelect.innerHTML = "<option value=''>-- Select a time --</option>";
 
   // Must have a date + at least one service
-  if (!date || (pedicure === "NONE" && manicure === "NONE" && nailExtension === "NONE")) {
+  if (!date || (hair === "NONE" && manicure === "NONE" && nailExtension === "NONE")) {
     timeSelect.innerHTML = "<option value=''>COMPLETE FORM TO SEE AVAILABLE SLOTS</option>";
     return;
   }
