@@ -425,12 +425,14 @@
 </div>
 </div>
 
+
 <!-- Booking Section -->
-<div class="content-section" id="bookingSection">
+<div class="content-section active" id="bookingSection">
 <h1>BOOK APPOINTMENT</h1>
 <form onsubmit="submitBooking(event)">
 <label for="name">Name:</label>
 <input id="name" required type="text"/>
+
 <label for="phone">Phone Number:</label>
 <input 
   id="phone" 
@@ -440,15 +442,18 @@
   placeholder="eg... (876) 123-4567" 
   required 
 />
+
 <label for="date">Preferred Date:</label>
 <input id="date" min="" onchange="loadAvailableSlots()" required type="date"/>
+
 <label for="selectedTime">Available Times:</label>
 <select id="selectedTime" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
 <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
 </select>
+
 <label for="hairStyle">Select Hairstyle:</label>
 <select id="hairStyle" onchange="showEstimateTime(); loadAvailableSlots();" required>
-<option value="NONE">NONE</option>
+<option value="">-- Please Select a Hairstyle --</option>
 <option value="Lemondae">Lemondae</option>
 <option value="Fulani">Fulani</option>
 <option value="Braided Mowhawk">Braided Mowhawk</option>
@@ -462,23 +467,25 @@
 <option value="Aliesha Keese Braid">Aliesha Keese Braid</option>
 <option value="Corn Row">Corn Row</option>
 </select>
+
 <label for="Size">Select Size:</label>
 <select id="Size" onchange="showEstimateTime(); loadAvailableSlots();" required>
-<option value="NONE">NONE</option>
+<option value="">-- Please Select a Size --</option>
 <option value="Small">Small</option>
 <option value="Medium">Medium</option>
 <option value="Large">Large</option>
 <option value="Extra Large">Extra Large</option>
 </select>
-</select>
+
 <label for="Length">Select Length:</label>
 <select id="Length" onchange="loadAvailableSlots();" required>
-<option value="NONE">NONE</option>
+<option value="">-- Please Select a Length --</option>
 <option value="LONG">LONG</option>
 <option value="MEDIUM">MEDIUM</option>
 <option value="SHORT">SHORT</option>
 </select>
-<label for="addOns">Select Add ons:</label>
+
+<label for="addOns">Select Add ons (Optional):</label>
 <select id="addOns" onchange="loadAvailableSlots();">
 <option value="NONE">NONE</option>
 <option value="Bantoo Knots">Bantoo Knots</option>
@@ -487,18 +494,22 @@
 <option value="Barrel ends">Barrel ends</option>
 <option value="Bohemian Curls">Bohemian Curls</option>
 <option value="Bead">Bead</option>
+</select>
 
 <p id="estimateTimeMessage" style="color: #FE5DC7; font-weight: bold;"></p>
+
 <div style="margin: 15px 0; display: flex; align-items: center;">
 <input id="lateAgreement" required style="margin-right: 3px;" type="checkbox"/>
 <label for="lateAgreement" style="font-size: 14px; cursor: pointer; line-height: 1.4;">
         I agree to make an online deposit of <strong>$4,000 (JMD)</strong> within the next 48 Hours to secure my booking.
 </label>
 </div>
+
 <button type="submit">Book Now</button>
 </form>
 <p id="bookingMessage"></p>
 </div>
+
 
 <div class="content-section" id="reviewsSection">
 <h1 style="text-align:center; color:#FE5DC7;">CLIENT REVIEWS</h1>
