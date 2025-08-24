@@ -447,8 +447,8 @@
 <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
 </select>
 <label for="hairStyle">Select Hairstyle:</label>
-<select id="hairStyle" onchange="showEstimateTime(); loadAvailableSlots();">
-<option value="NONE">NONE</option>
+<select id="hairStyle" onchange="showEstimateTime(); loadAvailableSlots();" required>
+<option value="">Select Hairstyle</option>
 <option value="Lemondae">Lemondae</option>
 <option value="Fulani">Fulani</option>
 <option value="Braided Mowhawk">Braided Mowhawk</option>
@@ -463,15 +463,15 @@
 <option value="Corn Row">Corn Row</option>
 </select>
 <label for="Size">Select Size:</label>
-<select id="Size" onchange="showEstimateTime(); loadAvailableSlots();">
-<option value="NONE">NONE</option>
+<select id="Size" onchange="showEstimateTime(); loadAvailableSlots();" required>
+<option value="">Select Size</option>
 <option value="Small">Small</option>
 <option value="Medium">Medium</option>
 <option value="Large">Large</option>
 <option value="Extra Large">Extra Large</option>
 </select>
 <label for="addOns">Select Add ons:</label>
-<select id="addOns" onchange="showAddOnsOptions(); loadAvailableSlots();">
+<select id="addOns" onchange="loadAvailableSlots();">
 <option value="NONE">NONE</option>
 <option value="Bantoo Knots">Bantoo Knots</option>
 <option value="Curly Ends">Curly Ends</option>
@@ -480,14 +480,13 @@
 <option value="Bohemian Curls">Bohemian Curls</option>
 <option value="Bead">Bead</option>
 </select>
-<div id="LengthContainer" style="display: none; margin-top: 15px;">
 <label for="Length">Select Length:</label>
-<select id="Length" onchange="loadAvailableSlots()">
+<select id="Length" onchange="loadAvailableSlots();" required>
+<option value="">Select Length</option>
 <option value="LONG">LONG</option>
 <option value="MEDIUM">MEDIUM</option>
 <option value="SHORT">SHORT</option>
 </select>
-</div>
 <p id="estimateTimeMessage" style="color: #FE5DC7; font-weight: bold;"></p>
 <div style="margin: 15px 0; display: flex; align-items: center;">
 <input id="lateAgreement" required style="margin-right: 3px;" type="checkbox"/>
