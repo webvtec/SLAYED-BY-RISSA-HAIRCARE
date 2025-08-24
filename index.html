@@ -491,8 +491,8 @@
 <label for="hairStyle">Select Hairstyle:</label>
 <select id="hairStyle" onchange="showEstimateTime(); loadAvailableSlots();">
 <option value="NONE">NONE</option>
-<option value="Regular Pedicure">Regular Pedicure</option>
-<option value="Spa Pedicure">Spa Pedicure</option>
+<option value="Lemondae">Lemondae</option>
+<option value="Fulani">Fulani</option>
 <option value="Deluxe Pedicure">Deluxe Pedicure</option>
 <option value="Gel Pedicure">Gel Pedicure</option>
 <option value="Paraffin Pedicure">Paraffin Pedicure</option>
@@ -855,10 +855,10 @@ function showEstimateTime() {
     // Set estimated time based on pedicure type
     if (hairStyle !== 'NONE') {
         switch (hairStyle) {
-            case 'Regular Pedicure':
+            case 'Lemondae':
                 timeEstimate = 'Approximately 1 hour';
                 break;
-            case 'Spa Pedicure':
+            case 'Fulani':
                 timeEstimate = 'Approximately 1.5 hours';
                 break;
             case 'Deluxe Pedicure':
@@ -1584,8 +1584,8 @@ function getBufferForSelectedServices() {
 
 // ✅ Service durations in minutes
 const serviceDurations = {
-  "Regular Pedicure": 60,
-  "Spa Pedicure": 90,
+  "Lemondae": 60,
+  "Fulani": 90,
   "Deluxe Pedicure": 90,
   "Gel Pedicure": 120,
   "Regular Manicure": 60,
