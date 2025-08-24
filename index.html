@@ -470,6 +470,14 @@
 <option value="Large">Large</option>
 <option value="Extra Large">Extra Large</option>
 </select>
+</select>
+<label for="Length">Select Length:</label>
+<select id="Length" onchange="loadAvailableSlots();" required>
+<option value="">Select Length</option>
+<option value="LONG">LONG</option>
+<option value="MEDIUM">MEDIUM</option>
+<option value="SHORT">SHORT</option>
+</select>
 <label for="addOns">Select Add ons:</label>
 <select id="addOns" onchange="loadAvailableSlots();">
 <option value="NONE">NONE</option>
@@ -479,14 +487,7 @@
 <option value="Barrel ends">Barrel ends</option>
 <option value="Bohemian Curls">Bohemian Curls</option>
 <option value="Bead">Bead</option>
-</select>
-<label for="Length">Select Length:</label>
-<select id="Length" onchange="loadAvailableSlots();" required>
-<option value="">Select Length</option>
-<option value="LONG">LONG</option>
-<option value="MEDIUM">MEDIUM</option>
-<option value="SHORT">SHORT</option>
-</select>
+
 <p id="estimateTimeMessage" style="color: #FE5DC7; font-weight: bold;"></p>
 <div style="margin: 15px 0; display: flex; align-items: center;">
 <input id="lateAgreement" required style="margin-right: 3px;" type="checkbox"/>
