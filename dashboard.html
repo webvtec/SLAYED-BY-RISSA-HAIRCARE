@@ -560,12 +560,10 @@ box-sizing: border-box;
     }
 
     function loadGallery() {
-    function loadGallery() {
   const galleryContainer = document.getElementById('adminGallery');
-  const selectedSite = document.getElementById('siteSelect').value; // 🔹 Get selected site
+  const selectedSite = document.getElementById('siteSelect').value;
   galleryContainer.innerHTML = '';
 
-  // 🔹 Filter by siteId
   db.collection('gallery')
     .where("siteId", "==", selectedSite)
     .onSnapshot((querySnapshot) => {
@@ -607,7 +605,7 @@ box-sizing: border-box;
       }
     });
     }
-
+    
     function removePhoto(docId) {
       db.collection('gallery').doc(docId).delete().catch((error) => {
         console.error("Error removing document: ", error);
