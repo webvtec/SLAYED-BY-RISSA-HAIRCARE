@@ -2136,21 +2136,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Welcome Modal Functions
 function selectHairService() {
-    window.location.href = 'https://webvtec.github.io/SLAYED-BY-RISSA-HAIRCARE/index.html';
-  }
+  // Replace 'your-hair-website-url.html' with your actual hair service website URL
+  window.location.href = 'https://webvtec.github.io/SLAYED-BY-RISSA-HAIRCARE/index.html';
+}
 
-  // Nail Service: continue to next page or hide modal
-  function selectNailService() {
-    // Example: go to current site's nail booking page
-    window.location.href = 'https://webvtec.github.io/SLAYED-BY-RISSA-NAILCARE/index.html'; // replace with your actual nail page URL
-    // OR just hide modal to continue on the same page
-    // document.getElementById('welcomeModal').style.display = 'none';
-  }
+function selectNailService() {
+  // Hide the welcome modal and continue to current nail website
+  document.getElementById('welcomeModal').style.display = 'none';
+}
 
-  // Show modal on page load
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('welcomeModal').style.display = 'flex';
-  });
+// Show welcome modal when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Show the welcome modal immediately when page loads
+  document.getElementById('welcomeModal').style.display = 'flex';
+});
+
 
     
 // Shopping cart functionality
