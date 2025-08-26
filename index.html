@@ -302,6 +302,187 @@
       z-index: 10000;
     }
 
+    /* Welcome Modal Styles - Full Screen with Light Pink Gradient and Black Text */
+#welcomeModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffeef8 0%, #ffc2e1 25%, #ff9ec7 50%, #ffc2e1 75%, #ffeef8 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#welcomeModalContent {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 60px 40px;
+  border-radius: 30px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 25px 50px rgba(255, 182, 193, 0.3);
+  animation: modalSlideIn 0.6s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#welcomeModalContent h2 {
+  color: #000000;
+  font-size: clamp(24px, 5vw, 36px);
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#welcomeModalContent p {
+  color: #000000;
+  font-size: clamp(16px, 3vw, 22px);
+  margin-bottom: 50px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.service-button {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 25px auto;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+  color: #000000;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 15px;
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: 'Zilla Slab', serif;
+  box-shadow: 0 10px 25px rgba(255, 182, 193, 0.4);
+}
+
+.service-button:hover {
+  background: linear-gradient(135deg, #FFC0CB, #FFE4E1);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(255, 182, 193, 0.6);
+  color: #000000;
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.service-button:active {
+  transform: translateY(-1px);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  #welcomeModal {
+    padding: 15px;
+  }
+  
+  #welcomeModalContent {
+    padding: 40px 25px;
+    border-radius: 20px;
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .service-button {
+    padding: 18px 25px;
+    margin: 20px auto;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  #welcomeModalContent {
+    padding: 30px 20px;
+    min-height: 80vh;
+  }
+}
+
+
+.cart-button {
+  position: absolute;
+  top: 0;       /* stick to very top of section */
+  right: 0;     /* flush against right edge */
+  background-color: #EF92AB;
+  border: none;
+  height: 48px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.cart-button #cartCount {
+  position: absolute;
+  top: -6px;     
+  right: 2px;   /* push badge outward so it’s visible */
+  background: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1002;
+}
+
+
+.delivery-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.option-button {
+  flex: 1;
+  padding: 12px;
+  background-color: #FE5DC7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.option-button:hover {
+  background-color: #e04dad;
+}
+
+.option-button.active {
+  background-color: #EF92AB;
+}
+
+
     
 </style>
 </head>
