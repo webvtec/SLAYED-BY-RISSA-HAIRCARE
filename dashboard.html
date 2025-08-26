@@ -528,6 +528,10 @@ box-sizing: border-box;
       document.getElementById('timeInputs').style.display = isAllDay ? 'none' : 'block';
     }
 
+    function onSiteChange() {
+  loadGallery();
+    }
+
     function addPhotoUrl() {
   const urlInput = document.getElementById('photoUrlInput');
   const categorySelect = document.getElementById('photoCategorySelect');
