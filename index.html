@@ -1047,6 +1047,23 @@
 </div>
 </div>
 
+
+    <!-- Welcome Modal -->
+<div id="welcomeModal">
+  <div id="welcomeModalContent">
+    <h2>✨ WELCOME TO SLAYED BY RISSA ✨</h2>
+    <p>Which service are you looking for today?</p>
+    
+    <button class="service-button" onclick="selectHairService()">
+      💇‍♀️ HAIRDRESSING SERVICE
+    </button>
+    
+    <button class="service-button" onclick="selectNailService()">
+      💅 NAILCARE SERVICE
+    </button>
+  </div>
+</div>
+
 <script>
     let currentUser = null;
 
@@ -2116,7 +2133,577 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Welcome Modal Functions
+function selectHairService() {
+  // Replace 'your-hair-website-url.html' with your actual hair service website URL
+  window.location.href = 'https://webvtec.github.io/SLAYED-BY-RISSA-HAIRCARE/index.html';
+}
 
+function selectNailService() {
+  // Hide the welcome modal and continue to current nail website
+  document.getElementById('welcomeModal').style.display = 'none';
+}
+
+// Show welcome modal when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Show the welcome modal immediately when page loads
+  document.getElementById('welcomeModal').style.display = 'flex';
+});
+
+
+    
+// Shopping cart functionality
+let cart = [];
+
+// Updated loadProducts function with better error handling
+
+
+
+function loadProducts() {
+  const productsGrid = document.getElementById("productsGrid");
+  const emptyState = document.getElementById("productsEmpty");
+
+  db.collection("products").onSnapshot(snapshot => {
+    productsGrid.innerHTML = "";
+
+    if (snapshot.empty) {
+      emptyState.style.display = "block";
+      return;
+    } else {
+      emptyState.style.display = "none";
+    }
+
+    const grouped = {};
+    snapshot.forEach(doc => {
+      const product = { id: doc.id, ...doc.data() };
+      const section = product.section || "Other";
+
+      if (!grouped[section]) {
+        grouped[section] = [];
+      }
+      grouped[section].push(product);
+    });
+
+    for (const section in grouped) {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.innerHTML = `<h2 style="color:#E58BBE; margin:20px 0; text-align:center;">${section}</h2>`;
+
+      const grid = document.createElement("div");
+      grid.style.display = "grid";
+      grid.style.gridTemplateColumns = "repeat(auto-fit, minmax(250px, 1fr))";
+      grid.style.gap = "20px";
+
+      grouped[section].forEach(product => {
+        const card = createProductCard(product.id, product);
+        grid.appendChild(card);
+      });
+
+      sectionDiv.appendChild(grid);
+      productsGrid.appendChild(sectionDiv);
+    }
+  });
+}
+
+
+// ✅ Helper to render a single product card
+function renderProductCard(grid, product, imageUrl) {
+  const card = document.createElement('div');
+  card.classList.add('product-card');
+  card.style = `
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  `;
+  card.innerHTML = `
+    <img src="${imageUrl}" alt="${product.name}" style="width:120px; height:120px; object-fit:cover; border-radius:6px; margin-bottom:10px;">
+    <h3 style="color:#61134A; margin-bottom:5px;">${product.name}</h3>
+    <p style="font-size:14px; color:#444; margin-bottom:10px;">${product.description || ''}</p>
+    <p style="font-weight:bold; color:#FE5DC7;">$${product.price || ''}</p>
+  `;
+  grid.appendChild(card);
+}
+
+
+
+
+// ✅ Update showSection so products load when switching
+function showSection(sectionId) {
+  document.querySelectorAll('.content-section').forEach(section =>
+    section.classList.remove('active')
+  );
+  document.getElementById(sectionId).classList.add('active');
+
+  if (sectionId === 'gallerySection') {
+    loadGallery('galleryDisplay');
+  } else if (sectionId === 'reviewsSection') {
+    loadReviews(currentUser);
+  } else if (sectionId === 'productsSection') {
+    loadProducts();
+  }
+}
+
+    
+// Also update createProductCard to handle missing fields
+function createProductCard(id, product) {
+  const card = document.createElement('div');
+  card.style.cssText = `
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  `;
+  
+  const name = product.name || 'Unnamed Product';
+  const description = product.description || 'No description available';
+  const price = product.price || 0;
+  const imageUrl = product.imageUrl || product.image || 'https://via.placeholder.com/200x200/ddd/999?text=No+Image';
+  
+  card.innerHTML = `
+    <img src="${imageUrl}" alt="${name}" style="
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    " onerror="this.src='https://via.placeholder.com/200x200/ddd/999?text=No+Image';">
+    
+    <div style="padding: 20px;">
+      <h3 style="
+        margin: 0 0 10px 0;
+        color: #333;
+        font-size: 18px;
+      ">${name}</h3>
+      
+      <p style="
+        color: #666;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0 0 15px 0;
+      ">${description}</p>
+      
+      <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      ">
+        <span style="
+          font-size: 20px;
+          font-weight: bold;
+          color: #E58BBE;
+        ">$${parseFloat(price).toFixed(2)}</span>
+        
+        <button onclick="addToCart('${id}', '${name.replace(/'/g, "\\'")}', ${price}, '${imageUrl}')" style="
+          background: #61134A;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: bold;
+        ">Add to Cart</button>
+      </div>
+    </div>
+  `;
+  
+  return card;
+}
+
+    
+function addToCart(id, name, price, imageUrl) {
+  const existingItem = cart.find(item => item.id === id);
+  
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      id,
+      name,
+      price,
+      imageUrl,
+      quantity: 1
+    });
+  }
+  
+  updateCartDisplay();
+  
+  // Show success message
+  const button = event.target;
+  const originalText = button.textContent;
+  button.textContent = 'Added!';
+  button.style.background = '#4CAF50';
+  
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.style.background = '#61134A';
+  }, 1500);
+}
+
+function updateCartDisplay() {
+  const count = cart.reduce((total, item) => total + item.quantity, 0);
+  document.getElementById('cartCount').textContent = count;
+  
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+  
+  renderCartItems();
+}
+
+function renderCartItems() {
+  const container = document.getElementById('cartItems');
+  
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Your cart is empty</p>
+        <button onclick="toggleCart()" style="
+          background: #E58BBE;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 6px;
+          cursor: pointer;
+        ">Continue Shopping</button>
+      </div>
+    `;
+    return;
+  }
+  
+  container.innerHTML = cart.map(item => `
+    <div style="
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    ">
+      <img src="${item.imageUrl}" alt="${item.name}" style="
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-right: 15px;
+      ">
+      
+      <div style="flex: 1;">
+        <h4 style="margin: 0 0 5px 0; font-size: 16px;">${item.name}</h4>
+        <p style="margin: 0; color: #666;">$${item.price} each</p>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" style="
+          background: #ddd;
+          border: none;
+          width: 30px;
+          height: 30px;
+          border-radius: 4px;
+          cursor: pointer;
+        ">-</button>
+        
+        <span style="font-weight: bold; min-width: 20px; text-align: center;">${item.quantity}</span>
+        
+        <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})" style="
+          background: #ddd;
+          border: none;
+          width: 30px;
+          height: 30px;
+          border-radius: 4px;
+          cursor: pointer;
+        ">+</button>
+        
+        <button onclick="removeFromCart('${item.id}')" style="
+          background: #ff4444;
+          color: white;
+          border: none;
+          width: 30px;
+          height: 30px;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-left: 10px;
+        ">×</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateQuantity(id, newQuantity) {
+  if (newQuantity <= 0) {
+    removeFromCart(id);
+    return;
+  }
+  
+  const item = cart.find(item => item.id === id);
+  if (item) {
+    item.quantity = newQuantity;
+    updateCartDisplay();
+  }
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  updateCartDisplay();
+}
+
+function toggleCart() {
+  const modal = document.getElementById('cartModal');
+  const isVisible = modal.style.display === 'flex';
+  modal.style.display = isVisible ? 'none' : 'flex';
+  
+  if (!isVisible) {
+    updateCartDisplay();
+  }
+}
+
+function proceedToCheckout() {
+  if (cart.length === 0) {
+    alert('Your cart is empty!');
+    return;
+  }
+  
+  // Fill checkout summary
+  const summary = document.getElementById('checkoutSummary');
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  
+  summary.innerHTML = cart.map(item => `
+    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+      <span>${item.name} (x${item.quantity})</span>
+      <span>$${(item.price * item.quantity).toFixed(2)}</span>
+    </div>
+  `).join('') + `
+    <div style="
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+      font-weight: bold;
+      color: #E58BBE;
+    ">
+      <span>Total:</span>
+      <span>$${total.toFixed(2)}</span>
+    </div>
+  `;
+  
+  document.getElementById('cartModal').style.display = 'none';
+  document.getElementById('checkoutModal').style.display = 'flex';
+}
+
+function closeCheckout() {
+  document.getElementById('checkoutModal').style.display = 'none';
+}
+
+
+    // Add this function to your script section
+async function generateUniqueOrderNumber() {
+  let orderNumber;
+  let isUnique = false;
+  
+  while (!isUnique) {
+    // Generate 6-digit number (100000 to 999999)
+    orderNumber = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    // Check if it exists in database
+    const snapshot = await db.collection('orders')
+      .where('orderNumber', '==', orderNumber)
+      .get();
+    
+    if (snapshot.empty) {
+      isUnique = true;
+    }
+  }
+  
+  return orderNumber;
+}
+
+// Update your submitOrder function (make it async)
+async function submitOrder(event) {
+  event.preventDefault();
+
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    if (confirm("You must be logged in to place an order. Click OK to log in.")) {
+      window.location.href = 'login.html';
+    }
+    return;
+  }
+
+  const customerName = document.getElementById('checkoutName').value.trim();
+  const customerPhone = document.getElementById('checkoutPhone').value.trim();
+  const deliveryAddress = document.getElementById('checkoutAddress')?.value.trim() || "";
+  const knutsfordLocation = document.getElementById('knutsfordLocation')?.value || "";
+
+  // Validation
+  if (!customerName || !customerPhone) {
+    alert("Please fill in your Name and Phone.");
+    return;
+  }
+  if (!knutsfordLocation && !deliveryAddress) {
+    alert("Please select a Knutsford location OR enter a delivery address.");
+    return;
+  }
+  if (!cart || cart.length === 0) {
+    alert("Your cart is empty. Please add items before placing an order.");
+    return;
+  }
+
+  // Generate order number (pass customerName so prefix works)
+  const orderNumber = await generateUniqueOrderNumber(customerName);
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const orderData = {
+    uid: user.uid,
+    customerName,
+    customerPhone,
+    deliveryAddress,
+    knutsfordLocation,
+    items: cart,
+    total,
+    status: 'pending',
+    orderDate: firebase.firestore.FieldValue.serverTimestamp(),
+    orderNumber: orderNumber
+  };
+
+  // Save to Firestore
+  db.collection('orders').add(orderData)
+    .then(() => {
+      // Build Telegram message
+      const orderSummary = cart.map(item =>
+        `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`
+      ).join('\n');
+
+      const telegramMessage = `🛒 NEW PRODUCT ORDER
+
+📋 Order #: ${orderNumber}
+👤 Customer: ${customerName}
+📞 Phone: ${customerPhone}
+📍 Address: ${deliveryAddress || knutsfordLocation}
+
+🛍️ Items:
+${orderSummary}
+
+💰 Total: $${total.toFixed(2)}`;
+
+      console.log("Telegram message:", telegramMessage); // debug
+
+      const telegramBotToken = "7638261664:AAGm0MNVQxN0hlW1bhXBRf-kSRuMgRkCLC8";
+      const telegramChatId = "-1002734216867";
+
+      return fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: telegramMessage,
+          parse_mode: "HTML"
+        })
+      });
+    })
+    .then(() => {
+      // Show confirmation popup
+      showOrderConfirmation(orderNumber, customerName, total, cart);
+
+      // Reset cart and form
+      cart = [];
+      updateCartDisplay();
+      closeCheckout();
+      document.querySelector('#checkoutModal form').reset();
+    })
+    .catch(error => {
+      console.error('Error placing order:', error);
+      alert('Failed to place order. Please try again.');
+    });
+}
+
+
+    function showOrderConfirmation(orderNumber, customerName, total, cart) {
+  Swal.fire({
+    title: "",
+    html: `
+      <div style="text-align:center; font-size:15px; line-height:1.7; color:#222; padding:20px; font-family:Arial, sans-serif;">
+        
+        <!-- Order Number -->
+        <h2 style="color:#000; margin:0 0 8px 0; font-size:24px; font-weight:bold; letter-spacing:1px;">
+          ORDER #: ${orderNumber}
+        </h2>
+        
+
+        <!-- Payment Instructions -->
+        <p style="margin:0 0 12px 0; font-size:15px;">
+          Your order was made, the total must be transferred within <strong>48 hours</strong> or your order will be cancelled.<br>
+          Please use your <strong>Order Number</strong> as the banking reference.
+        </p>
+
+        <hr style="margin:18px 0; border:0; height:1px; background:#ddd;">
+
+        <p style="margin:0 0 20px 0; font-size:15px;">
+          Once payment is received, your order will be shipped and you’ll receive a confirmation message with all necessary details.
+        </p>
+
+        <!-- Total Due -->
+        <p style="margin:0 0 25px 0; font-size:18px; color:#6c2eb9; font-weight:bold;">
+          Payment Due: JMD ${total.toFixed(2)}
+        </p>
+
+        <hr style="margin:18px 0; border:0; height:1px; background:#ddd;">
+
+        <!-- Banking Details -->
+        <div style="text-align:left; margin:15px 0;">
+          <h3 style="color:#000; margin:0 0 12px 0; font-size:17px; font-weight:bold;">Banking Details</h3>
+          <p style="margin:4px 0; color:#000;"><strong>Bank:</strong> First Caribbean Bank</p>
+          <p style="margin:4px 0; color:#000;"><strong>Account Name:</strong> John Doe</p>
+          <p style="margin:4px 0; color:#000;"><strong>Account Number:</strong> 123456789</p>
+          <p style="margin:4px 0; color:#000;"><strong>Branch:</strong> Kingston, Jamaica</p>
+        </div>
+
+        <hr style="margin:18px 0; border:0; height:1px; background:#ddd;">
+
+        <!-- Reminder -->
+        <div style="margin-top:20px; text-align:center;">
+          <p style="margin:0; font-size:13px; color:#666;">
+            ℹ️ You can always find the banking details again in the 
+            <strong>PAYMENT INFO</strong> section of the menu.
+          </p>
+        </div>
+
+      </div>
+    `,
+    width: 460,
+    confirmButtonText: "OK",
+    confirmButtonColor: "#61134A",
+    showConfirmButton: true,
+    showCancelButton: false,
+    customClass: {
+      popup: "swal2-rounded"
+    }
+  });
+    }
+
+
+
+    function selectOption(option) {
+  const knutsfordDiv = document.getElementById("knutsfordDropdown");
+  const deliveryDiv = document.getElementById("deliveryAddressBlock");
+  const knutsfordSelect = document.getElementById("knutsfordLocation");
+  const addressInput = document.getElementById("checkoutAddress");
+
+  if (option === "knutsford") {
+    knutsfordDiv.style.display = "block";
+    deliveryDiv.style.display = "none";
+
+    knutsfordSelect.setAttribute("required", "true");
+    addressInput.removeAttribute("required");
+    addressInput.value = ""; // clear hidden input
+  } else if (option === "bearers") {
+    knutsfordDiv.style.display = "none";
+    deliveryDiv.style.display = "block";
+
+    addressInput.setAttribute("required", "true");
+    knutsfordSelect.removeAttribute("required");
+    knutsfordSelect.value = ""; // clear hidden select
+  }
+}
+
+    
     
   </script>
 </body>
