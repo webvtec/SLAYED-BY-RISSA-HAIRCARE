@@ -2135,23 +2135,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Welcome Modal Functions
-function selectNailService() {
-  // Replace 'your-hair-website-url.html' with your actual hair service website URL
-  window.location.href = 'https://webvtec.github.io/SLAYED-BY-RISSA-NAILCARE/index.html';
-}
-
 function selectHairService() {
-  // Hide the welcome modal and continue to current nail website
-  document.getElementById('welcomeModal').style.display = 'none';
+  // Close the welcome modal so the site is visible
+  document.getElementById("welcomeModal").style.display = "none";
+
+  // Show default gallery/designs section
+  showSection('gallerySection');
 }
 
-// Show welcome modal when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  // Show the welcome modal immediately when page loads
-  document.getElementById('welcomeModal').style.display = 'flex';
-});
-
-
+function selectNailService() {
+  // Redirect user to the booking site (replace with your actual link)
+  window.location.href = "https://webvtec.github.io/SLAYED-BY-RISSA-NAILCARE/index.html";
+}
     
 // Shopping cart functionality
 let cart = [];
