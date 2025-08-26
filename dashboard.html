@@ -339,10 +339,17 @@ box-sizing: border-box;
     <option value="Paraffin Wax">PARAFFIN WAX</option>
   </select>
 
+  <!-- 🔹 ADD THIS NEW SITE SELECTOR -->
+  <label for="siteSelect">SELECT SITE</label>
+  <select id="siteSelect">
+    <option value="siteA">Site A</option>
+    <option value="siteB">Site B</option>
+  </select>
+
   <button onclick="addPhotoUrl()">Add Photo</button>
 
   <div id="adminGallery"></div>
-</div> <!-- ✅ now closes correctly -->
+</div>
 
 
     <!-- Reservations Section -->
@@ -522,70 +529,83 @@ box-sizing: border-box;
     }
 
     function addPhotoUrl() {
-      const urlInput = document.getElementById('photoUrlInput');
-      const categorySelect = document.getElementById('photoCategorySelect');
-      const url = urlInput.value.trim();
-      const category = categorySelect.value.trim();
+  const urlInput = document.getElementById('photoUrlInput');
+  const categorySelect = document.getElementById('photoCategorySelect');
+  const siteSelect = document.getElementById('siteSelect'); // 🔹 NEW
+  const url = urlInput.value.trim();
+  const category = categorySelect.value.trim();
+  const siteId = siteSelect.value; // 🔹 NEW
 
-      if (url === '' || category === '') {
-        alert('Please enter a valid image URL and select a category.');
-        return;
-      }
+  if (url === '' || category === '' || siteId === '') {
+    alert('Please enter a valid image URL, select a category, and select a site.');
+    return;
+  }
 
-      db.collection('gallery').add({ url: url, category: category })
-        .then(() => {
-          urlInput.value = '';
-          categorySelect.value = '';
-          alert('Photo added successfully!');
-        })
-        .catch(error => {
-          console.error("Error adding document: ", error);
-          alert('Error adding photo: ' + error.message);
-        });
+  // 🔹 ADD siteId to the document
+  db.collection('gallery').add({ 
+    url: url, 
+    category: category,
+    siteId: siteId 
+  })
+    .then(() => {
+      urlInput.value = '';
+      categorySelect.value = '';
+      // Don't reset siteSelect so admin can add multiple photos to same site
+      alert('Photo added successfully!');
+    })
+    .catch(error => {
+      console.error("Error adding document: ", error);
+      alert('Error adding photo: ' + error.message);
+    });
     }
 
     function loadGallery() {
-      const galleryContainer = document.getElementById('adminGallery');
+    function loadGallery() {
+  const galleryContainer = document.getElementById('adminGallery');
+  const selectedSite = document.getElementById('siteSelect').value; // 🔹 Get selected site
+  galleryContainer.innerHTML = '';
+
+  // 🔹 Filter by siteId
+  db.collection('gallery')
+    .where("siteId", "==", selectedSite)
+    .onSnapshot((querySnapshot) => {
       galleryContainer.innerHTML = '';
 
-      db.collection('gallery').onSnapshot((querySnapshot) => {
-        galleryContainer.innerHTML = '';
+      const categories = {};
 
-        const categories = {};
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const imageUrl = data.url;
+        const category = data.category || 'Uncategorized';
 
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const imageUrl = data.url;
-          const category = data.category || 'Uncategorized';
+        if (!categories[category]) {
+          categories[category] = [];
+        }
+        categories[category].push({ imageUrl: imageUrl, docId: doc.id });
+      });
 
-          if (!categories[category]) {
-            categories[category] = [];
-          }
-          categories[category].push({ imageUrl: imageUrl, docId: doc.id });
-        });
+      for (const category in categories) {
+        galleryContainer.innerHTML += `
+          <div class="gallery-category">
+            <h3>${category}</h3>
+            <div class="gallery-wrapper">
+              <div class="gallery-grid" id="gallery-${category}"></div>
+            </div>
+          </div>
+        `;
 
-        for (const category in categories) {
-          galleryContainer.innerHTML += `
-            <div class="gallery-category">
-              <h3>${category}</h3>
-              <div class="gallery-wrapper">
-                <div class="gallery-grid" id="gallery-${category}"></div>
-              </div>
+        const categoryContainer = document.getElementById(`gallery-${category}`);
+
+        categories[category].forEach(item => {
+          categoryContainer.innerHTML += `
+            <div>
+              <img src="${item.imageUrl}" alt="Design">
+              <button class="remove-btn" onclick="removePhoto('${item.docId}')">X</button>
             </div>
           `;
-
-          const categoryContainer = document.getElementById(`gallery-${category}`);
-
-          categories[category].forEach(item => {
-            categoryContainer.innerHTML += `
-              <div>
-                <img src="${item.imageUrl}" alt="Design">
-                <button class="remove-btn" onclick="removePhoto('${item.docId}')">X</button>
-              </div>
-            `;
-          });
-        }
-      });
+        });
+      }
+    });
     }
 
     function removePhoto(docId) {
@@ -1156,6 +1176,26 @@ function closeStatusModal() {
   document.getElementById('statusModal').style.display = 'none';
   currentStatusBookingId = null;
 }
+
+      // 🔹 ADD THIS NEW FUNCTION
+function onSiteChange() {
+  loadGallery(); // Reload gallery for the selected site
+}
+
+// 🔹 ADD THIS EVENT LISTENER in your Firebase auth section
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    loadGallery();
+    showSection('reservationsPage');
+    loadReservations();
+    loadUnavailableDates();
+    
+    // 🔹 ADD EVENT LISTENER FOR SITE CHANGES
+    document.getElementById('siteSelect').addEventListener('change', onSiteChange);
+  } else {
+    window.location.href = 'index.html';
+  }
+});
 
 
   </script>
