@@ -1953,7 +1953,7 @@ function getBufferForSelectedServices() {
 
   const hairStyle = document.getElementById('hairStyle')?.value || "NONE";
   const Size = document.getElementById('Size')?.value || "NONE";
-  const nailExtensionType = document.getElementById('nailExtensionType')?.value || "NONE";
+  const addOns = document.getElementById('addOns')?.value || "NONE";
 
   // Example buffer logic — adjust if needed
   if (hairStyle === "Gel Pedicure") buffer = 60;
@@ -1993,7 +1993,7 @@ const serviceDurations = {
 function getSelectedServiceDuration() {
   const hair = document.getElementById('hairStyle')?.value || "NONE";
   const Size = document.getElementById('Size')?.value || "NONE";
-  const nailExtension = document.getElementById('nailExtensionType')?.value || "NONE";
+  const addOns = document.getElementById('addOns')?.value || "NONE";
 
   let duration = 0;
 
