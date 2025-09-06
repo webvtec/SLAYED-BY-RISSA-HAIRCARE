@@ -2011,7 +2011,8 @@ function getSelectedServiceDuration() {
   return duration || 60; // fallback
 }
 
-// ✅ FINAL version — only one loadAvailableSlots() now
+
+// ✅ FINAL version – only one loadAvailableSlots() now
 async function loadAvailableSlots() {
   const date = document.getElementById('date').value;
   const hair = document.getElementById('hairStyle')?.value || "NONE";
@@ -2093,10 +2094,13 @@ async function loadAvailableSlots() {
         const displayHours = ((hours + 11) % 12 + 1);
         const displayTime = `${displayHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
 
-        let option = document.createElement("option");
-        option.value = displayTime;
-        option.textContent = displayTime;
-        timeSelect.appendChild(option);
+        // ✅ Check if time slot is in the past (only for today)
+        if (!isTimeSlotInPast(date, displayTime)) {
+          let option = document.createElement("option");
+          option.value = displayTime;
+          option.textContent = displayTime;
+          timeSelect.appendChild(option);
+        }
       }
     }
 
@@ -2112,38 +2116,6 @@ async function loadAvailableSlots() {
     timeSelect.innerHTML = "<option value=''>Error loading slots</option>";
   }
 }
-
-
-    // ✅ Auto-format phone number in booking form
-document.addEventListener("DOMContentLoaded", function () {
-  const phoneInput = document.getElementById("phone");
-  if (phoneInput) {
-    phoneInput.addEventListener("input", function(e) {
-      let input = e.target.value.replace(/\D/g, ""); // only digits
-      if (input.length > 10) input = input.substring(0, 10); // max 10 digits
-
-      let formatted = input;
-
-      if (input.length > 6) {
-        formatted = `(${input.substring(0,3)}) ${input.substring(3,6)}-${input.substring(6)}`;
-      } else if (input.length > 3) {
-        formatted = `(${input.substring(0,3)}) ${input.substring(3)}`;
-      } else if (input.length > 0) {
-        formatted = `(${input}`;
-      }
-
-      e.target.value = formatted;
-    });
-  }
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const dateInput = document.getElementById("date");
-  if (dateInput) {
-    const today = new Date().toISOString().split("T")[0]; 
-    dateInput.setAttribute("min", today); // ✅ Block past dates
-  }
-});
 
 // Welcome Modal Functions
 function selectHairService() {
@@ -2215,12 +2187,12 @@ function isTimeSlotInPast(selectedDate, timeString) {
     return false;
   }
   
-  // If it's today, check if the time has passed
+  // If it's today, check if the time has passed (no buffer - allow last minute bookings)
   const timeMinutes = convertToMinutes(timeString);
   const currentMinutes = (now.getHours() * 60) + now.getMinutes();
   
-  // Add 60-minute buffer - can't book slots that start within 60 minutes
-  return timeMinutes <= (currentMinutes + 60);
+  // Only block slots that have already started
+  return timeMinutes <= currentMinutes;
 }
     
 
